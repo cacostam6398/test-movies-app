@@ -1,0 +1,35 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-6">
+      <div class="input-group input-group-lg">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-lg">Search</span>
+        </div>
+        <input placeholder="Search" (keyup)="applyFilter($event.target.value)" type="text" class="form-control"
+          aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+      </div>
+    </div>
+
+  </div>
+
+  <mat-paginator class="font-weight-bolder" [length]="resultsLength" [pageSize]="movies.length"
+    (page)="getServerData($event)">
+  </mat-paginator>
+
+  <div class="row container jumbotron">
+
+    <div class="col-4 mb-3" *ngFor="let item of movies">
+
+      <div class="card" [routerLink]="['/movies', item.id]">
+        <img [src]="'https://image.tmdb.org/t/p/w500'+item.poster_path">
+        <div class="card-body text-center">
+          <h5 class="card-title">{{item.original_title}}</h5>
+          <a [routerLink]="['/movies', item.id]" class="btn btn-primary">View Detail</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

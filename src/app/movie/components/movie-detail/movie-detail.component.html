@@ -1,0 +1,89 @@
+<div *ngIf="movie">
+
+  <div class="row">
+    <div class="col">
+      <h1>{{movie.title}}</h1>
+      <h6>Code {{movie.id}}</h6>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="row">
+    <div class="col-12">
+      <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-5 mr-2">
+      <div class="row justify-content-center">
+        <div class="col-9" id="img-container">
+          <img class="mat-elevation-z8" [src]="'https://image.tmdb.org/t/p/w500'+movie.poster_path">
+        </div>
+      </div>
+      <br>
+
+    </div>
+    <div class="col-6">
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            <div class="col ">
+              <h3>Features</h3>
+              <ul>
+                <li>Release date: {{movie.release_date | date: 'yyyy/MM/dd'}}</li>
+                <li>Language: {{movie.original_language}}</li>
+                <li>Popularity: {{movie.popularity}}</li>
+                <li>Vote average: {{movie.vote_average}}</li>
+                <li>Vote count: {{movie.vote_count}}</li>
+              </ul>
+            </div>
+          </div>
+
+          <mat-divider class=""></mat-divider>
+          <mat-expansion-panel (opened)="expandedList = true" (closed)="expandedList = false" [expanded]="expandedList">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h3>Summary</h3>
+              </mat-panel-title>
+              <mat-panel-description>
+
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="row mb-3 mt-3">
+              <div class="col-12">
+                <table class="table-striped">
+                  <tbody>
+                    <tr>
+                      <th></th>
+                      <td>{{movie.overview}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="row mt-2 mb-2">
+              <div class="col-12 fs-22">
+                <h3>Select your Rating: </h3>
+                <ngb-rating [(rate)]="currentRate"></ngb-rating>
+                <hr>
+                <pre>Score: <b>{{currentRate}}</b></pre>
+              </div>
+
+              <div class="col-10">
+                <button class="bt-w100" mat-raised-button color="primary" (click)="GuestSession()"> Send Rating
+                  <i class="far fa-shopping-cart"></i>
+                </button>
+              </div>
+            </div>
+          </mat-expansion-panel>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
