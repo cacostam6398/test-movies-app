@@ -29,6 +29,7 @@ export class MoviesComponent implements OnInit {
 
   //Load observable to the movie list 
   loadMovies() {
+    
     this._search$.pipe(
       debounceTime(600),
       switchMap(() =>
@@ -46,6 +47,8 @@ export class MoviesComponent implements OnInit {
     ).subscribe(data => {
       this.movies = data;
     });
+    
+    this.moviesService.filter.query='a'
     this._search$.next();
   }
 
